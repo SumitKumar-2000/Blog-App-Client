@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+:root {
+    --border-color: #edeef1;
+    --danger-color: #ff5c75;
+    --body-bg-color: #f3f4f7;
+    --warning-color: #ffbe0b;
+    --primary-color: #ffffff;
+    --success-color: #00c9a7;
+    --secondary-color: #202020;
+    --hover-secondary-color: #333333;
+    --input--bg-color: #fbfbff;
+    --input--border-color: #b7b7b7;
+    --input--text-color: #222222;
+    --container-bg-color: #ffffff;
+    --button--text-color: #ffffff;
+    --scrollbar-color: #333333;
+  }
+
+  /* ----- SCROLLBAR CSS ----- */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    border-radius: 30px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 30px;
+    background: var(--scrollbar-color);
+  }
+  
+  ::-webkit-scrollbar-thumb:window-inactive {
+    background: var(--scrollbar-color);
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  /* ---- SCROLLBAR CSS EXIT---- */
+
+  /* ---- MAIN ---- */
+
+  body {
+    color: var(--secondary-color);
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--body-bg-color);
+  }
+
+  .input{
+    @apply text-[var(--secondary-color)] bg-[var(--body--bg-color)] border border-[var(--input--border-color)] focus:border-gray-700 outline-none relative rounded-xs disabled:bg-gray-100 disabled:pointer-events-none w-full;
+  }
+
+  .input-xl {
+    @apply h-[48px] text-[16px] w-full py-1 px-2 rounded-sm;
+  }
+  
+  .input-lg {
+    @apply h-[45px] text-[14px] w-full py-1 px-2 rounded-sm;
+  }
+  
+  .input-sm {
+    @apply h-[32px] text-[14px] w-full py-1 px-2 rounded-xs;
+  }
+
+  .primary-btn {
+    @apply border border-transparent flex justify-center items-center disabled:cursor-not-allowed disabled:opacity-50 bg-[var(--secondary-color)] text-[var(--primary-color)] cursor-pointer w-full;
+  }
+
+  .secondary-btn {
+    @apply border border-gray-400 flex justify-center items-center disabled:cursor-not-allowed disabled:opacity-50 bg-[var(--body-bg-color)] text-[var(--secondary-color)] cursor-pointer w-full;
+  }
+
+  .btn-lg {
+    @apply h-[40px] px-4 text-[14px];
+  }
+  
+  .btn-sm {
+    @apply h-[32px] px-3 text-[14px];
+  }
+  
+  .btn-xs {
+    @apply h-[24px] px-2 text-[12px];
+  }
+
+  .form{
+    @apply p-4 max-sm:w-full w-[350px] bg-[var(--primary-color)] flex justify-center items-center flex-col gap-4
+  }
