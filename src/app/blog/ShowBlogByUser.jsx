@@ -11,7 +11,7 @@ export default function ShowBlogByUser() {
   const [blogs, setBlogs] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
-  const fetchBlogs = (async () => {
+  const fetchBlogs = async () => {
     try {
       const res = await api.get(`/api/v1/blogs/user/blog`);
       setBlogs(res.data);
@@ -21,7 +21,7 @@ export default function ShowBlogByUser() {
     } finally {
       setLoading(false);
     }
-  });
+  };
 
   const handleDelete = async (blogId) => {
     if (!window.confirm("Are you sure you want to delete this blog?")) return;
@@ -48,11 +48,18 @@ export default function ShowBlogByUser() {
     <PageWrapper className={"p-4"}>
       <div className="flex w-full justify-between">
         <h1 className="text-2xl font-bold mb-4">Your Blogs</h1>
-        <ReactRouter.Link to={"/blogs/create"} className="w-[150px]">
-          <FormElements.Button type="button" className="btn-sm">
-            Create New
-          </FormElements.Button>
-        </ReactRouter.Link>
+        <div className="flex gap-2">
+          <ReactRouter.Link to={"/blogs/create"} className="w-[100px]">
+            <FormElements.Button type="button" className="btn-sm">
+              Create New
+            </FormElements.Button>
+          </ReactRouter.Link>
+          <ReactRouter.Link to={"/"} className="w-[100px]">
+            <FormElements.Button type="button" variant="secondary" className="btn-sm">
+              Home
+            </FormElements.Button>
+          </ReactRouter.Link>
+        </div>
       </div>
 
       {loading ? (
