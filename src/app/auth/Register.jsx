@@ -13,20 +13,30 @@ export default function Register() {
     password: "",
   });
 
-  const handleChange = React.useCallback((e) => {
-      setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    },[setFormData]);
+  const handleChange = React.useCallback(
+    (e) => {
+      setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    },
+    [setFormData]
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    const trimmedData = {
+      email: formData.email.trim(),
+      password: formData.password.trim(),
+    };
+
     try {
-      await api.post("/api/v1/auth/register", formData);
+      await api.post("/api/v1/auth/register", trimmedData);
       navigate("/login");
     } catch (err) {
       alert(err.message);
+    } finally {
+      setLoading(false);
     }
-    setLoading(true);
   };
 
   return (

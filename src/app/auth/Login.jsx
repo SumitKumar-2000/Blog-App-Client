@@ -19,15 +19,22 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    const trimmedData = {
+      email: formData.email.trim(),
+      password: formData.password.trim(),
+    };
+
     try {
-      const res = await api.post("/api/v1/auth/login", formData);
+      const res = await api.post("/api/v1/auth/login", trimmedData);
       login(res.user, res.token);
       alert("Login successful");
       navigate("/");
     } catch (err) {
       alert(err.message);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (

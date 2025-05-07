@@ -71,10 +71,15 @@ export default function BlogForm({ formType = "create" }) {
     e.preventDefault();
     setLoading(true);
 
+    const trimmedData = {
+      ...formData,
+      title: formData.title.trim(),
+      description: formData.description.trim(),
+    }
 
     try {
       if (isEdit) {
-        await api.patch(`/api/v1/blogs/${id}/user`, formData);
+        await api.patch(`/api/v1/blogs/${id}/user`, trimmedData);
         alert("Blog updated successfully");
       } else {
         await api.post("/api/v1/blogs", formData);
@@ -83,9 +88,10 @@ export default function BlogForm({ formType = "create" }) {
       navigate("/");
     } catch (err) {
       alert(err.message);
+    } finally {
+      setLoading(false);
     }
 
-    setLoading(false);
   };
 
   return (
