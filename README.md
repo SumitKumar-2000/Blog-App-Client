@@ -60,3 +60,19 @@ All routes under `/blogs/*` are wrapped in `RequireAuth` to ensure only logged-i
 
 ---
 
+## Snips
+# Login Page
+<img width="932" alt="image" src="https://github.com/user-attachments/assets/2281a9e4-79d7-4f33-82b9-e0bc127bfee5" />
+
+# Register Page
+<img width="947" alt="image" src="https://github.com/user-attachments/assets/145c21c1-ba8e-4b5f-8f12-de45638eb3ec" />
+
+# All Blogs ( Table Format )
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/37ddf3c1-0a12-4bf6-b640-79888715f23d" />
+
+# Particular Blog page
+<img width="943" alt="image" src="https://github.com/user-attachments/assets/976f585a-8a50-44d6-9f3d-a7171c92f9d1" />
+
+
+
+
