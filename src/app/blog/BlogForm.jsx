@@ -82,7 +82,7 @@ export default function BlogForm({ formType = "create" }) {
         await api.patch(`/api/v1/blogs/${id}/user`, trimmedData);
         alert("Blog updated successfully");
       } else {
-        await api.post("/api/v1/blogs", formData);
+        await api.post("/api/v1/blogs", trimmedData);
         alert("Blog created successfully");
       }
       navigate("/");
@@ -91,7 +91,6 @@ export default function BlogForm({ formType = "create" }) {
     } finally {
       setLoading(false);
     }
-
   };
 
   return (
