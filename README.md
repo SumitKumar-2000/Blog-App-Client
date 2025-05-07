@@ -1,12 +1,62 @@
-# React + Vite
+# Blog App – Client (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **client-side** of a full-stack Blog Application built using **React**, **React Router**, and **Tailwind CSS**. It interacts with a Node.js + Sequelize + PostgreSQL backend.
 
-Currently, two official plugins are available:
+The application allows users to:
+- View all public blogs
+- Register and login
+- Create, edit, and delete their own blogs
+- View blogs by a specific user
+- View full details of a blog
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Routes Overview
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The application uses **React Router** for managing page navigation and guards.
+
+### ✅ Public Routes
+
+| Path        | Component       | Description                      |
+|-------------|------------------|----------------------------------|
+| `/`         | `ShowAllBlog`    | Displays all public blogs        |
+| `/login`    | `Login`          | User login form                  |
+| `/register` | `Register`       | User registration form           |
+
+- Wrapped with `RedirectIfAuthenticated` to redirect logged-in users.
+
+---
+
+### 🔐 Protected Routes (Require Authentication)
+
+All routes under `/blogs/*` are wrapped in `RequireAuth` to ensure only logged-in users can access them.
+
+| Path                   | Component         | Description                            |
+|------------------------|------------------|----------------------------------------|
+| `/blogs/:id`           | `Blog`           | View blog details by blog ID           |
+| `/blogs/create`        | `Blog`           | Create a new blog                      |
+| `/blogs/edit/:id`      | `Blog`           | Edit an existing blog (by blog ID)     |
+| `/blogs/user/:id`      | `ShowBlogByUser` | Show all blogs written by specific user|
+
+- `Blog` component supports `formType="create"` or `formType="edit"` props.
+
+---
+
+### 🚫 Fallback Route
+
+| Path    | Component   | Description           |
+|---------|-------------|-----------------------|
+| `*`     | `NotFound`  | 404 - Page not found  |
+
+---
+
+## 🔧 Architecture Highlights
+
+- **React Router v6+** for SPA routing and nested layouts
+- **React.lazy & Suspense** for route-based code splitting
+- **Protected routes** using `RequireAuth` component
+- **Pagination** and **limit controls** on list views
+- **Dynamic view** for blog details (including image, description, created by, etc.)
+
+---
+
