@@ -72,9 +72,13 @@ export default function ShowBlogByUser() {
             {blogs.length > 0 ? (
               blogs.map((blog, i) => (
                 <T.TableRow key={i}>
-                  {tableHeads.map((head, j) => (
-                    <T.TableCell key={j}>{blog[head.attribute]}</T.TableCell>
-                  ))}
+                  {tableHeads.map((head, j) => {
+                    let value = blog[head.attribute];
+                    if (typeof value === "string" && value.length > 30) {
+                      value = value.substring(0, 30) + "...";
+                    }
+                    return <T.TableCell key={j}>{value}</T.TableCell>;
+                  })}
                   <T.TableCell className="flex gap-3">
                     <Link
                       to={`/blogs/edit/${blog.id}`}

@@ -21,7 +21,7 @@ export default function BlogForm({ formType = "create" }) {
       const fetchBlog = async () => {
         try {
           const res = await api.get(`/api/v1/blogs/${id}/user`);
-          const blog = res.data.data;
+          const blog = res.data;
           setFormData({
             title: blog.title,
             description: blog.description,
@@ -74,7 +74,7 @@ export default function BlogForm({ formType = "create" }) {
 
     try {
       if (isEdit) {
-        await api.patch(`/api/v1/blogs/${id}`, formData);
+        await api.patch(`/api/v1/blogs/${id}/user`, formData);
         alert("Blog updated successfully");
       } else {
         await api.post("/api/v1/blogs", formData);

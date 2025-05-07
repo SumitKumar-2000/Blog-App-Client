@@ -18,10 +18,13 @@ export default function DataTable({ data, tableHeads, routeIdName }) {
           data.map((blog, i) => (
             <T.TableRow key={i}>
               {tableHeads.map((head, j) => {
-                const value = head.attribute.split('.').reduce((acc, part) => acc?.[part], blog);
+                let value = blog[head.attribute];
+                if (typeof value === "string" && value.length > 30) {
+                  value = value.substring(0, 30) + "...";
+                }
                 return (
                   <T.TableCell className="truncate" key={j}>
-                    {head.isDate ? value : value}
+                    {value}
                   </T.TableCell>
                 );
               })}
@@ -39,7 +42,10 @@ export default function DataTable({ data, tableHeads, routeIdName }) {
           ))
         ) : (
           <T.TableRow>
-            <T.TableCell colSpan={tableHeads.length + (routeIdName ? 1 : 0)} className="text-center">
+            <T.TableCell
+              colSpan={tableHeads.length + (routeIdName ? 1 : 0)}
+              className="text-center"
+            >
               No blogs found.
             </T.TableCell>
           </T.TableRow>
