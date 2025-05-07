@@ -1,13 +1,13 @@
-import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import PageWrapper from "@components/PageWrapper";
 import * as FormElement from "@components/FormElements";
+import * as ReactRouter from "react-router-dom";
+import PageWrapper from "@components/PageWrapper";
+import React from "react";
 import api from "@utils/FetchApi";
 
 export default function BlogForm({ formType = "create" }) {
   const isEdit = formType === "edit";
-  const navigate = useNavigate();
-  const { id } = useParams();
+  const navigate = ReactRouter.useNavigate();
+  const { id } = ReactRouter.useParams();
 
   const [formData, setFormData] = React.useState({
     title: "",
@@ -25,7 +25,7 @@ export default function BlogForm({ formType = "create" }) {
           setFormData({
             title: blog.title,
             description: blog.description,
-            image: blog.image, 
+            image: null, 
           });
         } catch (err) {
           console.log("error: ", err)

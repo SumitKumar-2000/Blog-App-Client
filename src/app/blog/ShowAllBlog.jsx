@@ -1,9 +1,9 @@
-import React from "react";
-import Navbar from "@/components/Navbar";
-import PageWrapper from "@/components/PageWrapper";
-import api from "@utils/FetchApi";
-import DataTable from "@components/DataTable";
 import PaginationControls from "@components/PaginationControls";
+import PageWrapper from "@/components/PageWrapper";
+import DataTable from "@components/DataTable";
+import Navbar from "@/components/Navbar";
+import React from "react";
+import api from "@utils/FetchApi";
 
 export default function ShowAllBlog() {
   const [blogs, setBlogs] = React.useState([]);

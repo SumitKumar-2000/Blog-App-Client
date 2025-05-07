@@ -9,16 +9,16 @@ const Login = () => {
   const navigate = ReactRouter.useNavigate();
   const { login } = useAuth();
 
-  const [loading, setLoading] = React.useState(false)
+  const [loading, setLoading] = React.useState(false);
   const [formData, setFormData] = React.useState({ email: "", password: "" });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = React.useCallback((e) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  },[setFormData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     try {
       const res = await api.post("/api/v1/auth/login", formData);
       login(res.user, res.token);
@@ -31,7 +31,13 @@ const Login = () => {
   };
 
   return (
-    <PageWrapper height={"100vh"} className={"flex justify-center items-center p-4"}>
+    <PageWrapper
+      height={"100vh"}
+      className={"flex justify-center items-center p-4 relative"}
+    > 
+      <ReactRouter.Link to={"/"} className="absolute right-4 top-4">
+        <FormElement.Button className="btn-xs">Blogs</FormElement.Button>
+      </ReactRouter.Link>
       <form className="form" onSubmit={handleSubmit}>
         <h1 className="text-xl font-bold">LOGIN</h1>
         <FormElement.Input
@@ -52,7 +58,7 @@ const Login = () => {
           className="input-sm"
           onChange={handleChange}
         />
-        <FormElement.Button 
+        <FormElement.Button
           type="submit"
           className="btn-lg"
           loading={loading}
@@ -60,6 +66,12 @@ const Login = () => {
         >
           Login
         </FormElement.Button>
+        <p className="text-xs">
+          Not a user -{" "}
+          <strong className="hover:underline">
+            <ReactRouter.Link to={"/register"}>Sign Up</ReactRouter.Link>
+          </strong>
+        </p>
       </form>
     </PageWrapper>
   );

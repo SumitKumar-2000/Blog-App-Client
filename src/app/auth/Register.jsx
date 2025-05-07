@@ -13,9 +13,9 @@ export default function Register() {
     password: "",
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = React.useCallback((e) => {
+      setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    },[setFormData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,8 +32,11 @@ export default function Register() {
   return (
     <PageWrapper
       height={"100vh"}
-      className={"flex justify-center items-center p-4"}
+      className={"flex justify-center items-center p-4 relative"}
     >
+      <ReactRouter.Link to={"/"} className="absolute right-4 top-4">
+        <FormElement.Button className="btn-xs">Blogs</FormElement.Button>
+      </ReactRouter.Link>
       <form className="form" onSubmit={handleSubmit}>
         <h1 className="text-xl font-bold">SIGN UP</h1>
         <FormElement.Input
@@ -74,6 +77,12 @@ export default function Register() {
         >
           Register
         </FormElement.Button>
+        <p className="text-xs">
+          Alread a user -{" "}
+          <strong className="hover:underline">
+            <ReactRouter.Link to={"/login"}>Login</ReactRouter.Link>
+          </strong>
+        </p>
       </form>
     </PageWrapper>
   );

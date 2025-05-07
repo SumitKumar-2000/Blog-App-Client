@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import * as FormElements from "@components/FormElements"
+import * as ReactRouter from "react-router-dom";
 import PageWrapper from "@components/PageWrapper";
 import Navbar from "@components/Navbar";
+import React from "react";
 import api from "@utils/FetchApi";
 
 export default function BlogDetails() {
-  const { id } = useParams();
-  const [blog, setBlog] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { id } = ReactRouter.useParams();
+  const [blog, setBlog] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchBlog = async () => {
       try {
         const res = await api.get(`/api/v1/blogs/${id}`);
@@ -34,14 +33,9 @@ export default function BlogDetails() {
       <Navbar />
       <PageWrapper className="max-w-4xl mx-auto p-6">
         <div className="mb-8">
-          <div className="flex justify-between">
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">
-              {blog.title}
-            </h1>
-            <Link to={`/blogs/edit/${id}`} className="w-[80px]">
-              <FormElements.Button className="btn-sm" variant="primary">Edit</FormElements.Button>
-            </Link>
-          </div>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+            {blog.title}
+          </h1>
           <div className="text-sm text-gray-600">
             <span>
               By <strong>{blog.user?.full_name}</strong>

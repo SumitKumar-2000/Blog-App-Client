@@ -1,10 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import * as ReactRouter from "react-router-dom";
 import { useAuth } from "@/lib/context/Auth";
 import * as FormElements from "@components/FormElements";
 
 const Navbar = () => {
   const { user, authenticated, logout } = useAuth();
-  const navigate = useNavigate();
+  const navigate = ReactRouter.useNavigate();
 
   const handleLogout = () => {
     logout();
@@ -13,13 +13,13 @@ const Navbar = () => {
 
   return (
     <nav className="bg-[var(--primary-color)] shadow p-4 flex justify-between items-center h-[8vh]">
-      <Link to="/" className="text-xl font-bold">
+      <ReactRouter.Link to="/" className="text-xl font-bold">
         VEGALOG
-      </Link>
+      </ReactRouter.Link>
       <div className="flex items-center gap-2">
         {authenticated ? (
           <>
-            <Link to={`/blogs/user/${user.id}`} className="w-[100px]">
+            <ReactRouter.Link to={`/blogs/user/${user.id}`} className="w-[100px]">
               <FormElements.Button
                 type="button"
                 className="btn-sm"
@@ -27,7 +27,7 @@ const Navbar = () => {
               >
                 My Blogs
               </FormElements.Button>
-            </Link>
+            </ReactRouter.Link>
             <div className="w-[100px]">
               <FormElements.Button
                 type="button"
@@ -55,7 +55,7 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Link to="/login">
+            <ReactRouter.Link to="/login">
               <FormElements.Button
                 type="button"
                 variant="primary"
@@ -63,8 +63,8 @@ const Navbar = () => {
               >
                 Login
               </FormElements.Button>
-            </Link>
-            <Link to="/register">
+            </ReactRouter.Link>
+            <ReactRouter.Link to="/register">
               <FormElements.Button
                 type="button"
                 variant="secondary"
@@ -72,7 +72,7 @@ const Navbar = () => {
               >
                 Sign Up
               </FormElements.Button>
-            </Link>
+            </ReactRouter.Link>
           </>
         )}
       </div>
