@@ -1,13 +1,19 @@
+import * as FormElements from "@components/FormElements";
 import * as ReactRouter from "react-router-dom";
 import PageWrapper from "@components/PageWrapper";
+import { useAuth } from "@/lib/context/Auth";
 import Navbar from "@components/Navbar";
 import React from "react";
 import api from "@utils/FetchApi";
+import CommentPost from "@/components/CommentPost";
 
 export default function BlogDetails() {
   const { id } = ReactRouter.useParams();
+  const { authenticated } = useAuth();
   const [blog, setBlog] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+  const [comment, setComment] = React.useState("");
+  const [postingComment, setPostingComment] = React.useState(false);
 
   React.useEffect(() => {
     const fetchBlog = async () => {
@@ -22,6 +28,23 @@ export default function BlogDetails() {
     };
     fetchBlog();
   }, [id]);
+
+  const postComment = async () => {
+    setPostingComment(true);
+
+    try {
+      await api.post(`/api/v1/comments/blog/${id}`, {
+        content: comment.trim(),
+      });
+      setComment("");
+      const res = await api.get(`/api/v1/blogs/${id}`);
+      setBlog(res.data);
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setPostingComment(false);
+    }
+  };
 
   if (loading)
     return <p className="text-center mt-10 text-gray-500">Loading...</p>;
@@ -53,26 +76,38 @@ export default function BlogDetails() {
           />
         )}
 
-        <div className="prose prose-lg max-w-none text-gray-800 mb-10">
+        <div className="prose prose-lg max-w-none text-gray-800 mb-8">
           <p className="whitespace-pre-line">{blog.description}</p>
         </div>
+        <hr />
+        {authenticated ? (
+          <div className="flex gap-2 mt-4">
+            <FormElements.Input
+              type="text"
+              name="comment"
+              value={comment}
+              disabled={postingComment}
+              placeholder="Comment Something"
+              className="input-sm flex-8"
+              onChange={(e) => setComment(e.target.value)}
+            />
+            <FormElements.Button
+              type="button"
+              variant="primary"
+              disabled={postingComment}
+              onClick={postComment}
+              className="btn-sm flex-2"
+            >
+              Post
+            </FormElements.Button>
+          </div>
+        ) : null}
 
         {blog.comments?.length > 0 && (
-          <div className="border-t pt-6 mt-10">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
-              Comments
-            </h2>
-            <ul className="space-y-4">
+          <div className="mt-4">
+            <ul className="space-y-2">
               {blog.comments.map((comment) => (
-                <li
-                  key={comment.id}
-                  className="border rounded-lg p-4 shadow-sm bg-white"
-                >
-                  <p className="text-gray-700">{comment.content}</p>
-                  <span className="block text-xs text-gray-500 mt-1">
-                    {new Date(comment.created_at).toLocaleString()}
-                  </span>
-                </li>
+                <CommentPost comment={comment} />
               ))}
             </ul>
           </div>
