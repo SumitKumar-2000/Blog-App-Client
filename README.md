@@ -71,7 +71,18 @@ All routes under `/blogs/*` are wrapped in `RequireAuth` to ensure only logged-i
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/37ddf3c1-0a12-4bf6-b640-79888715f23d" />
 
 # Particular Blog page
-<img width="943" alt="image" src="https://github.com/user-attachments/assets/976f585a-8a50-44d6-9f3d-a7171c92f9d1" />
+<img width="952" alt="image" src="https://github.com/user-attachments/assets/594cd4c5-ceba-4d2e-9cf4-63e1e7ed5d09" />
+
+# Blog By user
+<img width="947" alt="image" src="https://github.com/user-attachments/assets/ef72356d-d65b-4509-9f3c-2d1dd6c5ce1a" />
+
+# Blog Creation
+<img width="676" alt="image" src="https://github.com/user-attachments/assets/6d2211b6-9665-4deb-aa65-b35ce851847f" />
+
+# Blog Updation
+<img width="699" alt="image" src="https://github.com/user-attachments/assets/a41f8726-809c-4ca2-8758-e8ca50455686" />
+
+
 
 
 
