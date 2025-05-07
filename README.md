@@ -82,8 +82,8 @@ All routes under `/blogs/*` are wrapped in `RequireAuth` to ensure only logged-i
 # Blog Updation
 <img width="699" alt="image" src="https://github.com/user-attachments/assets/a41f8726-809c-4ca2-8758-e8ca50455686" />
 
-
-
+# Comment Feature
+<img width="544" alt="image" src="https://github.com/user-attachments/assets/710c515b-7e8c-4db1-a8b1-065cd96472c2" />
 
 
 
