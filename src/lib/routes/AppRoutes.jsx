@@ -6,7 +6,7 @@ import React from "react";
 
 const Blog = React.lazy(() => import("@/app/blog/Blog"));
 const Login = React.lazy(() => import("@/app/auth/Login"));
-const EditBlog = React.lazy(() => import("@/app/blog/EditBlog"));
+const BlogForm = React.lazy(() => import("@/app/blog/BlogForm"));
 const NotFound = React.lazy(() => import("@/app/notFound/NotFound"));
 const Register = React.lazy(() => import("@/app/auth/Register"));
 const ShowAllBlog = React.lazy(() => import("@/app/blog/ShowAllBlog"));
@@ -48,9 +48,7 @@ const router = createBrowserRouter([
         path: ":id",
         element: (
           <Suspense>
-            <RequireAuth>
               <Blog />
-            </RequireAuth>
           </Suspense>
         ),
       },
@@ -59,7 +57,7 @@ const router = createBrowserRouter([
         element: (
           <Suspense>
             <RequireAuth>
-              <Blog formType="create" />
+              <BlogForm formType="create" />
             </RequireAuth>
           </Suspense>
         ),
@@ -69,7 +67,7 @@ const router = createBrowserRouter([
         element: (
           <Suspense>
             <RequireAuth>
-              <Blog formType="edit" />
+              <BlogForm formType="edit" />
             </RequireAuth>
           </Suspense>
         ),
