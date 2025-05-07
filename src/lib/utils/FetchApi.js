@@ -1,10 +1,13 @@
 const BASE_URL = import.meta.env.VITE_BASE_SERVER_URL
 
 const fetchWithAuth = async (url, options = {}) => {
-    const token = localStorage.getItem("token");
+    let token = localStorage.getItem("token");
+    if (token?.startsWith('"') && token.endsWith('"')) {
+      token = token.slice(1, -1);
+    }
     const headers = {
       "Content-Type": "application/json",
-      ...(token && { Authorization: `Bearer ${token}` }),
+      ...(token && { authorization: `Bearer ${token}` }),
       ...options.headers,
     };
   

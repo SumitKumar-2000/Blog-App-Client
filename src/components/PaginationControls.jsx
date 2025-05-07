@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { BsChevronDoubleLeft, BsChevronLeft, BsChevronRight, BsChevronDoubleRight } from "react-icons/bs";
 
 export default function PaginationControls({ page, lastPage, limit, count, onPageChange }) {

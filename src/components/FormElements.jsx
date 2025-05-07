@@ -42,3 +42,20 @@ export const Button = React.forwardRef(({ children, className, loading, ...props
   }
 );
 Button.displayName = "Button";
+
+export const Textarea = React.forwardRef(
+  ({ className = "", error, ...props }, ref) => {
+    return (
+      <div className="w-full">
+        <textarea
+          ref={ref}
+          className={`min-h-[200px] input ${className}`}
+          {...props}
+        />
+        {error && <div className="text-[11px] text-red-600">{error}</div>}
+      </div>
+    );
+  }
+);
+
+Textarea.displayName = "Textarea";

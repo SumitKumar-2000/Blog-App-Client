@@ -36,7 +36,7 @@ export default function ShowAllBlog() {
   }, []);
 
   return (
-    <>
+    <div>
       <Navbar />
       <PageWrapper className="p-6">
         <DataTable data={blogs} tableHeads={tableHeads} routeIdName="id" />
@@ -48,6 +48,6 @@ export default function ShowAllBlog() {
           onPageChange={fetchBlogs}
         />
       </PageWrapper>
-    </>
+    </div>
   );
 }

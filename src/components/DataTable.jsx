@@ -20,7 +20,7 @@ export default function DataTable({ data, tableHeads, routeIdName }) {
               {tableHeads.map((head, j) => {
                 const value = head.attribute.split('.').reduce((acc, part) => acc?.[part], blog);
                 return (
-                  <T.TableCell key={j}>
+                  <T.TableCell className="truncate" key={j}>
                     {head.isDate ? value : value}
                   </T.TableCell>
                 );

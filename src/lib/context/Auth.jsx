@@ -1,22 +1,16 @@
 import React from "react";
-import {
-  getLocalStorage,
-  setLocalStorage,
-  removeLocalStorage,
-} from "@utils/LocalStorage";
-
 const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = React.useState(getLocalStorage("token"));
-  const [user, setUser] = React.useState(getLocalStorage("user"));
+  const [token, setToken] = React.useState(localStorage.getItem("token"));
+  const [user, setUser] = React.useState(JSON.parse(localStorage.getItem("user")));
   const [authenticated, setAuthenticated] = React.useState(false);
 
   const login = (userData, authToken) => {
     setUser(userData);
     setToken(authToken);
-    setLocalStorage("user", userData);
-    setLocalStorage("token", authToken);
+    localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem("token", authToken);
     setAuthenticated(true);
   };
 
@@ -24,13 +18,13 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     setToken(null);
     setAuthenticated(false);
-    removeLocalStorage("user");
-    removeLocalStorage("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   };
 
   React.useEffect(() => {
-    const storedUser = getLocalStorage("user");
-    const storedToken = getLocalStorage("token");
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedToken = localStorage.getItem("token");
 
     setUser(storedUser);
     setToken(storedToken);
