@@ -6,6 +6,7 @@ import Navbar from "@components/Navbar";
 import React from "react";
 import api from "@utils/FetchApi";
 import CommentPost from "@/components/CommentPost";
+import PageLoader from "@/components/PageLoader";
 
 export default function BlogDetails() {
   const { id } = ReactRouter.useParams();
@@ -46,10 +47,7 @@ export default function BlogDetails() {
     }
   };
 
-  if (loading)
-    return <p className="text-center mt-10 text-gray-500">Loading...</p>;
-  if (!blog)
-    return <p className="text-center mt-10 text-red-500">Blog not found.</p>;
+  if (loading) return <PageLoader/>;
 
   return (
     <>

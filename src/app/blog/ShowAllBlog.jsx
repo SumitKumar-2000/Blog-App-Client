@@ -4,9 +4,11 @@ import DataTable from "@components/DataTable";
 import Navbar from "@/components/Navbar";
 import React from "react";
 import api from "@utils/FetchApi";
+import PageLoader from "@/components/PageLoader";
 
 export default function ShowAllBlog() {
   const [blogs, setBlogs] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
   const [pagination, setPagination] = React.useState({
     page: 1,
     limit: 10,
@@ -29,11 +31,19 @@ export default function ShowAllBlog() {
       lastPage: res.pagination.lastPage,
       count: res.pagination.totalItems,
     });
+    setLoading(false);
   };
 
   React.useEffect(() => {
     fetchBlogs(pagination);
   }, []);
+
+  if(loading){
+    return (
+        <PageLoader/>
+    )
+  }
+  
 
   return (
     <div>
